@@ -1,0 +1,5 @@
+# Original working screenshots may contain personal paths and identifiers.
+/img/
+# Local previews, browser captures and disposable review artifacts.
+/output/
+__pycache__/
