@@ -1,20 +1,22 @@
 # M480 Secure Boot ISP 更新指南
 
-本機網頁投影片／操作指南，沿用 `/web` 既有 Nuvoton 頁面的側欄、字體、色彩及 Markdown／Mermaid 渲染方式。
+說明 M480 Secure Boot／Secure ISP 的金鑰配置、範例程式與韌體更新流程。
 
 - 可編輯原稿：`index.md`。
 - 網頁入口：`index.html`。
 - 網站路徑：`/slide_Nuvoton_secure_boot_operation_M480/`；知識庫首頁的 Nuvoton 平台專題提供入口。
-- 共用版型：`../notices_can/assets/style.css`、`../notices_can/assets/app.js`；本專案未修改共用檔案。
+- 共用版型：`../notices_can/assets/style.css`、`../notices_can/assets/app.js`。
 - 網站圖片：`assets/screenshots/`；來源與處理方式見 `assets/screenshots/manifest.json`。
 - 完整尺寸流程圖：`assets/diagrams/`；由原稿的三張 Mermaid 圖同步輸出。
-- 本機驗證紀錄：`SELF_CHECK.md`。
+- 測試範圍與維護紀錄：`SELF_CHECK.md`。
 
 ## 內容範圍
 
-ICP 的 Boot Loader／Security Lock、Secure Boot key 與 KPROM 配置；SecureBootTool 的 Waiting／Loading／認證、Key Options、首次兩區部署與後續 APROM-only 更新；以及自訂 LDROM、APROM／SRAM 的適用條件與限制。
+Secure Boot 的開機驗證，以及更新時 SecureBootTool／MCU 的分工；ICP 的 Boot Loader／Security Lock、Secure Boot key 與 KPROM 配置；SecureBootTool 的 Waiting／Loading／認證及 Key Options；專用 LDROM 與 APROM／SRAM 兩份 ROM API 範例的建置、功能與更新流程，以及 SW2／KEY1（UART0 數字 `1`）觸發方式。
 
-已驗證專用 LDROM 流程與尚未實作的 SRAM 方案，在正文中分別標示。硬體結果來自使用者回報，網頁驗證不代表新增硬體測試。
+專用 LDROM 的 SW2 更新循環與 APROM／SRAM 範例均有實機測試回報。兩份範例均提供 SW2／KEY1 入口；個別入口、版本往返、映像保留與故障恢復的驗證範圍見[驗證範圍](index.md#verification)。
+
+範例的頁內說明分別位於 `index.md#ldrom-example` 與 `index.md#sram-example`；共用按鍵／terminal 設定在 `#entry-triggers`，SRAM 完整操作在 `#sram-operation`。
 
 ## 本機預覽
 
@@ -30,8 +32,6 @@ Markdown 與 Mermaid 使用與既有站點相同的固定版本 CDN，預覽需�
 
 ## 素材與資料範圍
 
-`img/` 保留使用者原始素材，可能含個人路徑；`.gitignore` 排除此資料夾。頁面只引用 `assets/screenshots/` 的審閱版本。公開範例金鑰已獲使用者同意保留，供兩套工具輸入對照；個人路徑與識別資料需遮蔽。
+`img/` 保留使用者原始素材，可能含個人路徑；`.gitignore` 排除此資料夾。頁面只引用 `assets/screenshots/` 的審閱版本。頁面使用公開教學範例金鑰對照兩套工具輸入；個人路徑與識別資料需遮蔽。
 
 圖片內的檔案大小、配置與 retry 參數為畫面示意，正式產品以其建置／部署紀錄為準。實際產品金鑰不收錄於一般診斷資料。
-
-本次交付為本機專案與入口索引更新，尚未進行 Git push／部署。後續發布遵循 `/web/AGENTS.md` 與共用公開內容準則。

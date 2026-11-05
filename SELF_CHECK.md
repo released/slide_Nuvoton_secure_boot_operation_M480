@@ -1,6 +1,179 @@
 # Web slide verification record
 
-Record: 2026/11/03, Asia/Taipei. Local project: `slide_Nuvoton_secure_boot_operation_M480`.
+## 2026/11/05 current delivery — Keil-only BSP repositories published
+
+- User authorized simplifying both examples to Library/SampleCode/README/.gitignore
+  and publishing them to GitHub. Removed scripts/docs/output and SELF_CHECK from
+  the two firmware roots only after verified copies were saved under ignored
+  output/internal/bsp_github_20261105. Its manifest preserves original paths,
+  file hashes and the protected firmware-source baseline; no engineering history
+  was discarded. Machine-generated Keil user/driver settings remain local/ignored.
+- Both READMEs now open the actual Keil projects/targets and identify the BINs in
+  their obj directories. Updated this slide's build table, deployment file names
+  and actual repository source links; existing concepts/anchors/style/screenshots
+  and flow diagrams are preserved. This website change is local, not deployed.
+- NEW PASS: exported the exact staged Git trees into a newly owned temporary
+  directory, without scripts/docs/output or pre-existing object files. Keil6.22
+  rebuilt LDROM, APROM and SRAM APROM with0 errors/0 warnings. Existing archived
+  validators were run with only their project-root assignment redirected to the
+  clean trees; flash/RAM/vector/ROM-wrapper/branch checks passed. All three BINs
+  match their prior hashes: LDROM1840 bytes, APROM7080 bytes, SRAM APROM9472 bytes.
+- NEW PASS:211 dedicated-LDROM and179 SRAM source files match the pre-cleanup
+  SHA256 baseline. Public trees contain213 and181 files, respectively; no build
+  output, user Keil settings or engineering records were uploaded. Preserved SDK
+  CRLF/whitespace caused the initial all-added-file whitespace audit to flag SDK
+  formatting; no vendor source was reformatted. Changed README/.gitignore checks
+  pass with CR-at-EOL accounted for.
+- Published public repositories released/M480BSP_ISP_HID_20_SecureBoot at
+  972c1b317803a2ac611a00bcfb5aa7633ac0f8d8 and
+  released/M480BSP_ISP_HID_20_SecureBoot_SRAM at
+  4189035c5b426e06fdba18cc34a90d4d320cad41, both main. Remote refs, commit trees,
+  root entries and README bytes match the tested local trees; both local worktrees
+  are clean and track origin/main. No existing repository was overwritten.
+- NEW Chrome156 PASS:37 headings/19 loaded screenshots/3 Mermaid diagrams,
+  desktop1440x1000/mobile390x844, valid anchors/README project links, no overflow
+  or browser errors, working mobile TOC and print CSS. Build table and README
+  desktop/mobile appearance reviewed; path table condensed to remain readable.
+- Retain build logs, original records, qa_plan.json, publication.json and final
+  verification under the ignored archive; browser evidence remains in
+  output/review/bsp_publish_docs_20261105.json. Task-owned clean build tree,
+  renderer scripts and captures are retired after review with scoped/hash checks.
+- NOT RUN: new board programming, runtime authentication, fault/recovery testing
+  or website publication. Earlier user-reported hardware coverage remains the
+  evidence for device behavior; this revision changes delivery/docs only.
+
+Earlier records below describe preceding documentation layouts and local-only
+firmware repositories; current delivery status is defined above.
+
+## 2026/11/05 current documentation — details owned by the slide
+
+- Final user-directed scope keeps each firmware README to28 lines: purpose, build,
+  five quick verification steps and essential limits. Detailed concepts and
+  operation remain in this guide, with stable direct links from both READMEs.
+- Added the build/toolchain/output section and separated power-on Secure Boot
+  authentication from update-time PC-tool/MCU responsibilities. Explained the
+  KPROM prompt, successful programming and executable/re-enterable APP as separate
+  observable stages. Kept the original style, screenshots and three flow diagrams.
+- NEW Chrome156 PASS:1440x1000 and390x844,37 headings/36 TOC links,19 loaded
+  screenshots,3 Mermaid diagrams; anchors, mobile TOC navigation, print CSS and
+  homepage entry passed with no browser errors or overflow. Both short READMEs
+  passed desktop/mobile, five-step and cross-document slide-anchor checks.
+  Concept/PC-tool/mobile/README captures were visually reviewed.
+- Firmware BIN/HEX hashes match the pre-edit baselines. No firmware source,
+  configuration or build was changed/run; no independent board test or publication
+  was performed. Earlier seven-section README/34-heading checks below describe
+  intermediate documents, not the current public copy.
+- Retain output/review/refocus_20261105_browser.json and refocus_20261105_final.json;
+  retired test-only scripts/captures are accounted for in the final record. Earlier
+  README versions and their hash baselines remain under ignored output/internal.
+
+## 2026/11/05 two vendor ROM API examples and operation READMEs
+
+- Added equal-level dedicated-LDROM and APROM/SRAM example descriptions, build
+  file/output names, shared SW2/UART0 digit1 instructions and a complete SRAM
+  installation/repeat-update chapter with a third Mermaid/SVG flow. Kept the
+  current shared renderer/style, nineteen screenshots, existing anchors and two
+  existing diagram bytes. Custom bootloader/MCUboot content remains outside scope.
+- The user now reports normal SRAM hardware verification. Updated the current
+  guide's applicability/evidence accordingly, while keeping individual trigger,
+  version, preservation and failure-recovery coverage qualified. The older scope
+  record that removed SRAM is superseded by this explicit example request; the
+  custom/customer-LDROM chapter remains archived outside public content.
+- Updated the site description/README and the homepage Markdown/HTML entry for
+  both examples and SW2/KEY1. Firmware repository URLs are not established yet;
+  current example links lead to their operation sections, without invented or
+  local-disk download URLs.
+- Rewrote both firmware READMEs as neutral, ordered operation guides. Their
+  SELF_CHECK files retain engineering history and distinguish new documentation
+  checks, reused build evidence and user-reported hardware results.
+- NEW browser PASS: Chrome156 desktop1440x1000/mobile390x844,34 headings/33 TOC
+  links,19 loaded screenshots,3 Mermaid diagrams; no missing anchors, duplicate
+  IDs, document overflow or browser errors. Mobile TOC, print CSS and homepage
+  entry checks passed. Desktop example/trigger/SRAM and narrow SRAM captures were
+  visually reviewed. Each firmware README also passed desktop/mobile, seven-step,
+  one-diagram and content-link checks; rendered desktop captures were reviewed.
+- Retain concise evidence examples_20261105_browser.json and
+  readmes_20261105_browser.json under ignored output/review. Owned test-only
+  scripts/captures are retired after review; pre-existing artifacts are preserved.
+  The two loopback preview servers close in their finalizers.
+- NOT RUN: new firmware builds, agent-operated board programming or publication.
+  Exported firmware hashes remain unchanged. No PDF exists here; PDF refresh is
+  N/A. No commit, push or deployment is performed.
+
+The dated records below remain engineering history; current example scope and
+SRAM hardware evidence are defined by the update above.
+
+## 2026/11/05 neutral public wording
+
+- Editorial-only update removes the public README's local-validation/no-push
+  paragraph and shared-file change-history clause. Existing maintenance records
+  retain that historical execution status; this revision does not publish the site.
+- Public purpose, sample-key explanation and hardware evidence now use neutral
+  language. Preserve the existing reported dedicated-LDROM SW2 and SRAM board
+  results and every explicit entry/version/preservation/recovery coverage limit.
+  No new independent hardware test or newly broadened acceptance is claimed.
+- Existing index/README/diagrams/SELF_CHECK modifications remain the baseline;
+  no firmware, screenshot, SVG, UI code, technical constants or anchors are changed.
+- PASS targeted source/links/UTF-8/fences/diff checks. Original technical code,
+  Mermaid blocks and stable anchors remain exact; public evidence still identifies
+  reported board coverage and untested preservation/recovery, without author-work
+  history. Shared policies and generated copies agree; approved old phrases gone.
+- NEW PASS installed Chrome, private profile: M480/#verification at1366x900 and
+ 390x844,3 diagrams/13 tables; no missing images, duplicate IDs, broken anchors,
+  document overflow or console errors. Actual JavaScript-disabled CAN fallback
+  shows neutral text. Changed desktop/narrow/fallback captures visually reviewed.
+- Reused the existing Tool test_web_browser runner in memory with only two affected
+  routes; redirected all owned output under this project's output/review, not
+  sibling projects. The browser connector was unavailable. Existing test/source
+  files and shared rendering code were not modified.
+- Retired338 generated files /15,606,723 bytes plus the disposable retirement
+  manifest; the entire owned run is absent. Exact ownership/hash/path/process
+  checks stayed within this project. Long-path empty directories needed extended
+  paths; no user/recovery data or original screenshot/SVG was deleted.
+- NOT RUN: new app/firmware/hardware acceptance or published-site verification.
+  No PDF exists here. No commit/push/deployment is performed by this editorial task.
+
+Latest record: 2026/11/05, Asia/Taipei. Local project: `slide_Nuvoton_secure_boot_operation_M480`.
+
+## 2026/11/05 vendor operation scope
+
+- User requested no custom-bootloader content in the web slide. Removed the customer-LDROM/SRAM architecture chapter, its reading-route/API/configuration/acceptance cross-references, and the third standalone diagram from the public asset tree. Renumbered troubleshooting/acceptance to7/8 while retaining their stable anchors.
+- Preserved vendor Mask ROM/BootIspLib explanations, dedicated LDROM/APROM example, ICP/KPROM/SBK screenshots, SecureBootTool flow, SW2/UART1-character entry trigger, all requested official references and the existing shared style. UART trigger and unverified hardware limits remain qualified.
+- Updated index.html description and README scope/diagram count. The homepage already describes vendor ICP/HSUSB/LDROM/APROM/SW2/UART operation only, so its existing uncommitted Markdown/HTML were left untouched. Firmware projects were not changed.
+- Preserved the removed chapter and its exact SVG under ignored output/internal/scope_20261105, with a purpose/hash manifest. This is engineering recovery material outside the public slide, not discarded user work.
+- NEW browser PASS, Chrome156: desktop1440x1000 and mobile390x844, 26 headings/25 TOC links,19 loaded screenshots,2 Mermaid diagrams, no duplicate IDs/broken anchors/document overflow, menu/TOC navigation and print CSS; no console/page/network asset errors. Explicit rendered-text check finds no custom/customer-LDROM/SRAM/MCUboot/I2C0 content.
+- NEW visual review PASS: desktop opening scope/TOC, troubleshooting/acceptance and mobile menu preserve the existing appearance and show the revised eight-section flow.
+- Static PASS: image-manifest hashes, unchanged remaining SVG/screenshot bytes, requested reference URLs, Markdown fences/links and git diff --check. No PDF exists for this site, so PDF refresh is N/A.
+- Test-only preview/captures/script/logs are owned fixtures: close only the loopback preview process, retire them after review, retain concise output/review/scope_20261105_browser.json and scope_20261105_final.json. Prior review artifacts and all unrelated modifications remain untouched.
+- NOT RUN: new hardware tests or published-site verification. No commit/push/deployment performed.
+
+The following 2026/11/04 and earlier records are retained engineering history; their three-diagram/custom-integration scope is superseded by the revision above.
+
+## 2026/11/04 concepts, entry methods and SRAM example
+
+- Added the Secure Boot/Secure ISP comparison and all three requested official reference URLs. Clarified configured firmware authentication regions, KPROM authorization, SBK/IB roles and full reset versus the CPU-only loader handoff.
+- Documented the dedicated LDROM image's BootIspLib wrappers, HSUSB setup and interrupt forwarding; the main secure engine remains in MCU Mask ROM. The supplied M487 header exposes HSUSBD/UART1 APIs; UART0 ASCII `1` is an application entry trigger, while this example still transfers firmware over HSUSB.
+- Added application integration guidance for `secure_update.h`, Init/Request/Poll, custom event triggers and vector/IB/peripheral constraints. Dedicated LDROM reuse is qualified for the same board/configuration; existing customer bootcode requires a separate architecture decision.
+- Updated the APROM/SRAM section for the implemented sibling example. It is build/static verified and hardware pending. IB storage location is distinguished from the firmware regions authenticated by that IB.
+- Preserved the shared style, all 19 screenshot bytes and the exclusion of customer questionnaires from the rendered teaching guide. Updated the homepage entry description in both Markdown and its HTML projection.
+- Current local Git repositories exist for the guide and homepage. The older no-repository observations below describe 2026/11/03 only. No commit, push or deployment was performed during this revision.
+
+| New check | Actual result |
+| --- | --- |
+| Desktop 1440 x 1000 | PASS: 31 headings, 30 TOC entries, 19 loaded screenshots, 3 Mermaid diagrams, valid anchors and no document overflow |
+| Mobile 390 x 844 | PASS: no document overflow; menu and repeat-update TOC navigation work |
+| Layout and print CSS | PASS: desktop concept/repeat/integration captures reviewed; shared accent/font preserved; print sidebar/controls hidden |
+| Browser errors/assets | PASS: no JavaScript console/page errors or failed content/asset requests |
+| Static content/assets | PASS: UTF-8, fences, local links, requested URLs/API text, 19 screenshot hashes, parseable SVGs and synchronization with the three Mermaid source blocks |
+| Firmware evidence | NEW PASS: original APROM rebuild and standalone SRAM build/static/C90/negative-bound checks; original LDROM image unchanged. Detailed logs and hashes belong to each firmware project's SELF_CHECK |
+| Hardware | REUSED user-reported PASS: original dedicated-LDROM SW2 cycle. NOT RUN: new UART trigger, SRAM USB/authentication/program/reset/reentry, preservation and interrupted-update recovery |
+| Interactive device access | Unavailable: read-only inventory returned no apps/browsers and Windows native pipe os error 2; no board/configuration/key operation performed |
+
+Current evidence: `output/review/browser-check.json`, `browser-check-console.txt`, `validation_20261104.txt`, final viewport captures and synchronized SVG exports. Custom UART0/I2C0 transport is recorded as a later engineering phase, not an implemented feature or a demonstrated SecureBootTool compatibility claim.
+
+Final PASS: homepage Markdown/HTML entry descriptions match, both affected repositories pass `git diff --check`, and the owned preview server was stopped with port 8768 confirmed closed. Task-owned firmware renderer temporaries/duplicate log were retired; final web captures and verification evidence remain. Record: `output/review/final_check_20261104.json`.
+
+The following sections retain the 2026/11/03 baseline and its verification history; implementation and repository-state statements in that history are superseded by the current revision above.
 
 ## Scope and content decisions
 
