@@ -6,6 +6,8 @@
 
 > 使用 Secure Boot 驗證 firmware 的合法性與完整性，透過 Secure ISP 完成授權更新。先用 ICP 配置開機選項與金鑰，再以 HSUSB SecureBootTool 部署韌體；APROM 保留 SW2／UART `1` 入口，供後續更新使用。
 
+Secure Boot 的信任根、Hash／驗章、金鑰角色與更新回復，見[原理與金鑰指南](../slide_secure_boot_fundamentals/)。本頁提供 M480 工具與範例的實際操作。
+
 <a id="scope"></a>
 
 ## 適用範圍與閱讀順序
