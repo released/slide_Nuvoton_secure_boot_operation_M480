@@ -47,9 +47,15 @@ Secure Boot 的信任根、Hash／驗章、金鑰角色與更新回復，見[原
 
 ### APROM／SRAM 範例
 
-`M480BSP_ISP_HID_20_SecureBoot_SRAM` 在 APROM 保留更新模組的載入映像。應用程式啟動時，由 C runtime 初始化 SRAM 內的向量、ROM API wrapper、USB ISR、資料與專用 stack。SW2／KEY1 觸發後切至 SRAM，再呼叫 `HSUSBD_ISP()`；更新期間不依賴 LDROM，也不返回已被改寫的 APROM。
+`M480BSP_ISP_HID_20_SecureBoot_SRAM` 在 APROM 保留更新模組的載入映像。
 
-Keil 專案為 `SampleCode/AP/Keil/SecureBootSRAM.uvprojx`，target 為 `SecureBootSRAM`，建置產生 `secure_boot_sram.bin`，完整路徑見[建置對照](#build-examples)。此例不產生 LDROM BIN，正常開機目的地須為 APROM（`CONFIG0[7]=1`）。完整部署、觸發與更新步驟見 [第 7 節](#sram-operation)。
+- 啟動時：C runtime 初始化 SRAM 內的向量、ROM API wrapper、USB ISR、資料與專用 stack。
+- 觸發時：SW2／KEY1 提出要求，切至 SRAM 後呼叫 `HSUSBD_ISP()`。
+- 更新期間：不依賴 LDROM，也不返回已被改寫的 APROM。
+
+- 建置：開啟 `SampleCode/AP/Keil/SecureBootSRAM.uvprojx`，target 為 `SecureBootSRAM`；產生 `secure_boot_sram.bin`，完整路徑見[建置對照](#build-examples)。
+- 開機配置：此例不產生 LDROM BIN，正常開機目的地須為 APROM（`CONFIG0[7]=1`）。
+- 操作：完整部署、觸發與更新步驟見[第 7 節](#sram-operation)。
 
 <a id="build-examples"></a>
 
@@ -72,7 +78,11 @@ Keil 專案為 `SampleCode/AP/Keil/SecureBootSRAM.uvprojx`，target 為 `SecureB
 
 保留各專案使用的 `.sct` 與啟動程式。建置錯誤時先處理工具鏈、BSP／library 位置與 linker 訊息，待成功後再進行更新。
 
-驗證版本切換時，在應用程式 UART 訊息加入可辨識的版號，再重新建置；每份新版都保留其更新入口與 linker 配置。專用 LDROM 版保留 `secure_update.c/.h`；SRAM 版還須包含 `secure_isp_ram.c/.h`、`secure_isp_transfer.s` 及 SRAM 的 ROM wrapper／向量／stack 配置。
+驗證版本切換時，在應用程式 UART 訊息加入可辨識的版號，再重新建置。
+
+- 每份新版都保留其更新入口與 linker 配置。
+- 專用 LDROM 版保留 `secure_update.c/.h`。
+- SRAM 版還須包含 `secure_isp_ram.c/.h`、`secure_isp_transfer.s`，以及 SRAM 的 ROM wrapper／向量／stack 配置。
 
 <a id="roles"></a>
 
@@ -418,7 +428,12 @@ flowchart TD
 
 在相同 M487JIDAE、12 MHz HXT、CON1 及記憶體／啟動配置下，可重用此範例建置的 `secure_boot_loader.bin`，並在 APP 保留上述更新入口。
 
-APP 移植須保留第一個 512-byte 向量區，讓重映射後、CPU reset 前的切換指令位於該區之外；保留 APROM IB，核對 LDROM 的 MSP／reset vector。另需停止實際使用的 DMA、RTOS、watchdog、USB stack 及周邊；目前範例只處理自身的 Timer1、UART0、SysTick 與 NVIC。每個後續 APROM 映像都保留初始化、輪詢與觸發入口。
+APP 移植的配置與停止條件：
+
+- 保留第一個 512-byte 向量區，讓重映射後、CPU reset 前的切換指令位於該區之外。
+- 保留 APROM IB，核對 LDROM 的 MSP／reset vector。
+- 停止實際使用的 DMA、RTOS、watchdog、USB stack 及周邊；目前範例只處理自身的 Timer1、UART0、SysTick 與 NVIC。
+- 每個後續 APROM 映像都保留初始化、輪詢與觸發入口。
 
 <a id="verification"></a>
 
@@ -477,7 +492,9 @@ flowchart TD
 
 ### 7.3 SRAM 入口的配置與錯誤處理
 
-SRAM 更新模組由 APROM 的載入映像初始化；更新開始後不返回被替換的 APROM。`BootIspLib_Keil.lib` 提供 ROM API wrapper，完整安全更新引擎仍在 Mask ROM。模組避開 ROM 使用的 `0x2000C000..0x2000FFFF` 工作區，一般 APP RAM 由 `0x20010000` 起配置。
+- 初始化與交接：SRAM 更新模組由 APROM 的載入映像初始化；更新開始後不返回被替換的 APROM。
+- ROM 服務：`BootIspLib_Keil.lib` 提供 ROM API wrapper，完整安全更新引擎仍在 Mask ROM。
+- 記憶體：模組避開 ROM 使用的 `0x2000C000..0x2000FFFF` 工作區，一般 APP RAM 由 `0x20010000` 起配置。
 
 | UART 錯誤碼 | 核對項目 |
 | --- | --- |
@@ -487,7 +504,10 @@ SRAM 更新模組由 APROM 的載入映像初始化；更新開始後不返回�
 | `-4` | 12 MHz HXT 與 192 MHz clock／HSUSB 準備 |
 | `-5` | CONFIG 讀取結果及正常 APROM 目的地（`CONFIG0[7]=1`） |
 
-APP 仍需能執行更新要求與主迴圈；SW2／KEY1 不提供對已卡死 APP 的獨立救援保證。IB 位於 APROM 最後 144 bytes（`0x0007FF70..0x0007FFFF`）；IB 的儲存位置與其驗證區域分別核對。此例不依賴 LDROM 執行，不代表實際 IB 一定未驗證 LDROM；日常更新不另寫 LDROM 檔案。
+- 入口條件：APP 仍需能執行更新要求與主迴圈；SW2／KEY1 不提供對已卡死 APP 的獨立救援保證。
+- IB 配置：位於 APROM 最後 144 bytes（`0x0007FF70..0x0007FFFF`）；其儲存位置與驗證區域分別核對。
+- LDROM 驗證範圍：不依賴 LDROM 執行，不代表實際 IB 一定未驗證 LDROM。
+- 寫入範圍：日常更新不另寫 LDROM 檔案。
 
 <a id="troubleshooting"></a>
 
