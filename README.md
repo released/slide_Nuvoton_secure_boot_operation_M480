@@ -39,14 +39,6 @@ Markdown 與 Mermaid 使用與既有站點相同的固定版本 CDN，預覽需�
 
 - `img/` 保留原始素材，可能含個人路徑；`.gitignore` 排除此資料夾。
 - 頁面只引用 `assets/screenshots/` 的審閱版本；個人路徑與識別資料需遮蔽。
-- 公開教學範例金鑰用於對照兩套工具輸入；實際產品金鑰不收錄於一般診斷資料。
+- 公開範例金鑰用於對照兩套工具輸入；實際產品金鑰不收錄於一般診斷資料。
 
 圖片內的檔案大小、配置與 retry 參數為畫面示意，正式產品以其建置／部署紀錄為準。
-
-## GitHub 維護
-
-- `github_push.bat --check`：檢查本專案的公開內容、遠端與 `gh-pages` 分支，不提交或推送。
-- `github_push.bat`：檢查通過後輸入 `PUSH`，提交並推送本專案。
-- 入口使用工作區公用 `push-project.ps1`，預設位於上層 `/web`。
-- 公用腳本位置也可由 `WEB_PUBLISH_ROOT`，或本機 `github_push.local.psd1` 的 `PublisherRoot` 指定。
-- 本機設定與工程紀錄不加入 Git。
